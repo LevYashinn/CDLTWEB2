@@ -1,0 +1,115 @@
+.product-detail-page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 16px 70px;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 48px;
+}
+.product-detail-image img, .product-detail-image .placeholder {
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  background: var(--bone);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  border: 1px solid var(--line);
+}
+.product-detail-info h1 {
+  margin: 0 0 10px;
+  font-size: 1.75rem;
+}
+.bd-brand, .bd-meta {
+  color: var(--ink-soft);
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+.bd-price {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--gold-dark);
+  margin: 18px 0 6px;
+}
+.bd-stock {
+  color: var(--success);
+  font-size: 0.86rem;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+.bd-description {
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+}
+.bd-options {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.bd-options-label {
+  font-weight: 600;
+  color: var(--ink);
+  margin-right: 4px;
+  font-size: 0.88rem;
+}
+.bd-option-btn {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 7px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.84rem;
+  transition: all 0.15s ease;
+}
+.bd-option-btn:hover {
+  border-color: var(--ink);
+}
+.bd-option-btn.active {
+  background: var(--ink);
+  color: white;
+  border-color: var(--ink);
+}
+.bd-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 8px;
+}
+.bd-actions input {
+  width: 72px;
+  padding: 11px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  font-family: var(--font-body);
+  text-align: center;
+}
+.btn-add-cart {
+  background: var(--ink);
+  color: white;
+  border: none;
+  padding: 13px 28px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-add-cart:hover {
+  background: var(--gold-dark);
+}
+.bd-success {
+  margin-top: 14px;
+  color: var(--success);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+@media (max-width: 700px) {
+  .product-detail-page { grid-template-columns: 1fr; gap: 28px; }
+}

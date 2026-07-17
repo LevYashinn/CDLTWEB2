@@ -1,0 +1,16 @@
+.profile-card {
+  max-width: 440px;
+}
+.profile-card input:disabled {
+  color: var(--ink-faint);
+  background: var(--line);
+  cursor: not-allowed;
+}
+.profile-success {
+  background: var(--success-tint);
+  color: var(--success);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}

@@ -1,0 +1,237 @@
+version: "3.8"
+
+services:
+
+  # ---------------- Infrastructure ----------------
+  mysql:
+    image: mysql:8.0
+    container_name: fashionstore-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - fashionstore-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: fashionstore-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - fashionstore-net
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: fashionstore-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - fashionstore-net
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: fashionstore-kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    networks:
+      - fashionstore-net
+
+  # ---------------- Service Discovery / Gateway ----------------
+
+  eureka-server:
+    build: ./eureka-server
+    container_name: fashionstore-eureka
+    ports:
+      - "8761:8761"
+    networks:
+      - fashionstore-net
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: fashionstore-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka-server
+      - redis
+    networks:
+      - fashionstore-net
+
+  # ---------------- Business Microservices ----------------
+
+  user-service:
+    build: ./user-service
+    container_name: fashionstore-user-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+    ports:
+      - "8081:8081"
+    networks:
+      - fashionstore-net
+
+  product-service:
+    build: ./product-service
+    container_name: fashionstore-product-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+      redis:
+        condition: service_started
+    ports:
+      - "8082:8082"
+    volumes:
+      - product_uploads:/app/uploads/products
+    networks:
+      - fashionstore-net
+
+  cart-service:
+    build: ./cart-service
+    container_name: fashionstore-cart-service
+    depends_on:
+      eureka-server:
+        condition: service_started
+      redis:
+        condition: service_started
+    ports:
+      - "8083:8083"
+    networks:
+      - fashionstore-net
+
+  order-service:
+    build: ./order-service
+    container_name: fashionstore-order-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+      kafka:
+        condition: service_started
+    ports:
+      - "8084:8084"
+    networks:
+      - fashionstore-net
+
+  payment-service:
+    build: ./payment-service
+    container_name: fashionstore-payment-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+    ports:
+      - "8085:8085"
+    networks:
+      - fashionstore-net
+
+  notification-service:
+    environment:
+      - MAIL_PASSWORD=pxwagjqkyyivwdfm
+    build: ./notification-service
+    container_name: fashionstore-notification-service
+    depends_on:
+      eureka-server:
+        condition: service_started
+      kafka:
+        condition: service_started
+    ports:
+      - "8086:8086"
+    networks:
+      - fashionstore-net
+
+
+  banner-service:
+    build: ./banner-service
+    container_name: fashionstore-banner-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+    ports:
+      - "8087:8087"
+    volumes:
+      - banner_uploads:/app/uploads/banners
+    networks:
+      - fashionstore-net
+
+  post-service:
+    build: ./post-service
+    container_name: fashionstore-post-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+    ports:
+      - "8088:8088"
+    volumes:
+      - post_uploads:/app/uploads/posts
+    networks:
+      - fashionstore-net
+
+  promotion-service:
+    build: ./promotion-service
+    container_name: fashionstore-promotion-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+    ports:
+      - "8089:8089"
+    networks:
+      - fashionstore-net
+
+  adminer:
+      image: adminer
+      container_name: fashionstore-adminer
+      ports:
+        - "8090:8080"
+      networks:
+        - fashionstore-net
+  # ---------------- Frontend ----------------
+
+  frontend:
+    build: ../frontend
+    container_name: fashionstore-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - fashionstore-net
+
+networks:
+  fashionstore-net:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  product_uploads:
+  banner_uploads:
+  post_uploads:

@@ -1,0 +1,104 @@
+.image-uploader {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.image-uploader__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.image-uploader__body {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.image-uploader__preview {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+.image-uploader__preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.image-uploader__remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.image-uploader__remove:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.image-uploader__placeholder {
+  width: 110px;
+  height: 110px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 13px;
+  cursor: pointer;
+  flex-shrink: 0;
+  text-align: center;
+  padding: 6px;
+}
+
+.image-uploader__placeholder:hover {
+  border-color: #999;
+  color: #666;
+}
+
+.image-uploader__actions button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.image-uploader__actions button:hover:not(:disabled) {
+  background: #f2f2f2;
+}
+
+.image-uploader__actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.image-uploader__error {
+  color: #c0392b;
+  font-size: 13px;
+  margin: 0;
+}

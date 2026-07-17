@@ -1,0 +1,96 @@
+/* =========================================================
+   FashionStore — Design System
+   Ink navy + brushed gold, editorial serif/sans pairing
+   ========================================================= */
+:root {
+  --ink: #14182A;
+  --ink-soft: #565B6E;
+  --ink-faint: #9296A6;
+  --bone: #F3F4F7;
+  --surface: #FFFFFF;
+  --line: #E4E5EC;
+  --gold: #B8925A;
+  --gold-dark: #96723F;
+  --gold-tint: #F4E9D8;
+  --moss: #2F4A3D;
+  --danger: #A23B3B;
+  --danger-tint: #FBEAEA;
+  --success: #2F6B49;
+  --success-tint: #E7F3EB;
+
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --shadow-card: 0 1px 2px rgba(20, 24, 42, 0.04), 0 6px 20px rgba(20, 24, 42, 0.06);
+  --shadow-card-hover: 0 10px 30px rgba(20, 24, 42, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--bone);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--gold-tint);
+  color: var(--ink);
+}
+
+/* Shared eyebrow / section-kicker style used across pages */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin: 0 0 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

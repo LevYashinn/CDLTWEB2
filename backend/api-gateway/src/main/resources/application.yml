@@ -1,0 +1,119 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+    
+# --- THÊM KHỐI GLOBALCORS NÀY ---
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: 
+              - "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+      # --------------------------------
+    
+      discovery:
+        locator:
+          enabled: false
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**,/api/auth/**
+          filters:
+            - JwtAuthenticationFilter
+
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/api/products/**,/api/categories/**,/api/brands/**
+          filters:
+            - JwtAuthenticationFilter
+
+        - id: cart-service
+          uri: lb://cart-service
+          predicates:
+            - Path=/api/cart/**
+          filters:
+            - JwtAuthenticationFilter
+
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/api/orders/**
+          filters:
+            - JwtAuthenticationFilter
+
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/api/payment/**
+          filters:
+            - JwtAuthenticationFilter
+
+        - id: banner-service
+          uri: lb://banner-service
+          predicates:
+            - Path=/api/banners/**
+          filters:
+            - JwtAuthenticationFilter
+
+        - id: post-service
+          uri: lb://post-service
+          predicates:
+            - Path=/api/posts/**
+          filters:
+            - JwtAuthenticationFilter
+
+        - id: promotion-service
+          uri: lb://promotion-service
+          predicates:
+            - Path=/api/promotions/**
+          filters:
+            - JwtAuthenticationFilter
+
+        # Ảnh upload (sản phẩm/banner/bài viết) - public, không cần JWT, phục vụ thẳng <img src>
+        - id: product-uploads
+          uri: lb://product-service
+          predicates:
+            - Path=/uploads/products/**
+
+        - id: banner-uploads
+          uri: lb://banner-service
+          predicates:
+            - Path=/uploads/banners/**
+
+        - id: post-uploads
+          uri: lb://post-service
+          predicates:
+            - Path=/uploads/posts/**
+
+  data:
+    redis:
+      host: redis
+      port: 6379
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

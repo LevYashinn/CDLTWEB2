@@ -1,0 +1,162 @@
+.cart-page {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 40px 16px 70px;
+}
+.cart-page h2 {
+  margin-bottom: 24px;
+  font-size: 1.6rem;
+}
+.empty-cart {
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+.btn-primary-inline {
+  display: inline-block;
+  background: var(--ink);
+  color: white;
+  padding: 11px 22px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.15s ease;
+}
+.btn-primary-inline:hover {
+  background: var(--gold-dark);
+}
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cart-item {
+  display: grid;
+  grid-template-columns: 72px 1fr 100px 110px 30px;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+}
+.cart-item-image img, .cart-item-image .placeholder {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: var(--bone);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart-item-info h4 {
+  margin: 0 0 4px;
+  font-size: 0.94rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+.cart-item-variant {
+  margin: 0 0 4px;
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+}
+.cart-item-info p {
+  margin: 0;
+  color: var(--gold-dark);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.cart-item-qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+.cart-item-qty button {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+  color: var(--ink);
+  transition: border-color 0.15s ease;
+}
+.cart-item-qty button:hover {
+  border-color: var(--ink);
+}
+.cart-item-total {
+  font-weight: 700;
+  color: var(--ink);
+  text-align: right;
+  font-family: var(--font-display);
+}
+.cart-item-remove {
+  background: none;
+  border: none;
+  color: var(--ink-faint);
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+.cart-item-remove:hover {
+  color: var(--danger);
+}
+.cart-summary {
+  margin-top: 28px;
+  background: var(--surface);
+  padding: 22px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+}
+.cart-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.02rem;
+  margin-bottom: 16px;
+}
+.cart-total-amount {
+  font-weight: 700;
+  color: var(--gold-dark);
+  font-family: var(--font-display);
+}
+.btn-checkout {
+  width: 100%;
+  background: var(--ink);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.96rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-checkout:hover {
+  background: var(--gold-dark);
+}
+/* --- TRẠNG THÁI HẾT HÀNG --- */
+.out-of-stock-item {
+  opacity: 0.55; /* Làm mờ sản phẩm đi một nửa */
+  background-color: #fafafa;
+  position: relative;
+}
+
+.out-of-stock-item:hover {
+  opacity: 1; /* Cho phép sáng lên một chút khi rê chuột vào để dễ thao tác xóa */
+  transition: opacity 0.3s ease;
+}
+
+.out-of-stock-msg {
+  color: #d93025; /* Màu đỏ cảnh báo */
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 6px;
+}
+
+/* Làm mờ nút Checkout khi bị disabled */
+.btn-checkout:disabled {
+  background-color: #a8a8a8;
+  cursor: not-allowed;
+  opacity: 0.8;
+}

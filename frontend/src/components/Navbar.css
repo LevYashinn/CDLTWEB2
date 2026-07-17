@@ -1,0 +1,140 @@
+.navbar {
+  background: var(--ink);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.navbar-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  gap: 20px;
+}
+.navbar-brand {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.navbar-brand::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: inline-block;
+}
+.navbar-links {
+  display: flex;
+  gap: 28px;
+  flex: 1;
+}
+.navbar-links a {
+  position: relative;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.92rem;
+  padding: 6px 0;
+  transition: color 0.15s ease;
+}
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -1px;
+  height: 1px;
+  background: var(--gold);
+  transition: right 0.2s ease;
+}
+.navbar-links a:hover {
+  color: #fff;
+}
+.navbar-links a:hover::after {
+  right: 0;
+}
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.navbar-actions a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+.navbar-actions a:hover {
+  color: #fff;
+}
+.cart-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.cart-link svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background: var(--gold);
+  color: var(--ink);
+  border-radius: 50%;
+  min-width: 17px;
+  height: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+.btn-primary-sm {
+  background: var(--gold);
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  color: var(--ink) !important;
+  font-weight: 600;
+  font-size: 0.86rem;
+  transition: background 0.15s ease;
+}
+.btn-primary-sm:hover {
+  background: #cba668;
+}
+.btn-link {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: inherit;
+  padding: 0;
+}
+.btn-link:hover {
+  color: #fff;
+}
+@media (max-width: 860px) {
+  .navbar-links { display: none; }
+  .navbar-inner { padding: 14px 16px; }
+  .navbar-actions { gap: 14px; }
+}

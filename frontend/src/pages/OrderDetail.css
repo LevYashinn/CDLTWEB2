@@ -1,0 +1,261 @@
+.order-detail-page {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 32px 16px 80px;
+}
+
+.order-detail-back {
+  display: inline-block;
+  color: var(--ink-faint);
+  text-decoration: none;
+  font-size: 0.84rem;
+  margin-bottom: 18px;
+  transition: color 0.15s ease;
+}
+
+.order-detail-back:hover {
+  color: var(--gold-dark);
+}
+
+.order-detail-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.order-detail-title-row h2 {
+  margin: 0 0 6px;
+  font-size: 1.5rem;
+}
+
+.order-detail-date {
+  color: var(--ink-faint);
+  font-size: 0.85rem;
+}
+
+/* Status progress tracker */
+.order-progress {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  padding: 22px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+
+.order-progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 84px;
+}
+
+.order-progress-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--line);
+  border: 2px solid var(--line);
+  transition: all 0.2s ease;
+}
+
+.order-progress-step.done .order-progress-dot {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.order-progress-label {
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  text-align: center;
+  font-weight: 500;
+}
+
+.order-progress-step.done .order-progress-label {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.order-progress-line {
+  flex: 1;
+  height: 2px;
+  background: var(--line);
+  margin: 0 -4px;
+  transform: translateY(-14px);
+  transition: background 0.2s ease;
+}
+
+.order-progress-line.done {
+  background: var(--gold);
+}
+
+.order-cancelled-banner {
+  background: var(--danger-tint);
+  color: var(--danger);
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 28px;
+}
+
+.order-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+}
+
+.order-detail-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  margin-bottom: 20px;
+}
+
+.order-detail-card h3 {
+  margin: 0 0 16px;
+  font-size: 1.05rem;
+}
+
+.order-detail-items {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* --- ĐÃ CẬP NHẬT: CONTAINER SẢN PHẨM --- */
+.order-detail-item {
+  display: flex;
+  align-items: center; /* Căn giữa hình ảnh và text */
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.order-detail-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* --- ĐÃ THÊM: KHUNG HÌNH ẢNH SẢN PHẨM --- */
+.order-detail-item-image-wrapper {
+  width: 72px;  /* Kích thước ảnh vừa vặn với thẻ card */
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md, 8px); 
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background-color: var(--surface);
+}
+
+.order-detail-item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- ĐÃ THÊM: PHẦN CHỨA TEXT CHIẾM CHỖ TRỐNG Ở GIỮA --- */
+.order-detail-item-info {
+  flex: 1;
+}
+
+.order-detail-item-name {
+  margin: 0 0 4px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.order-detail-item-variant {
+  margin: 0 0 4px;
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+}
+
+.order-detail-item-qty {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.order-detail-item-price {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.order-detail-item-price p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+}
+
+.order-detail-item-line-total {
+  font-weight: 700 !important;
+  color: var(--ink) !important;
+  font-size: 0.92rem !important;
+  margin-top: 4px !important;
+  font-family: var(--font-display);
+}
+
+.order-detail-totals {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.order-detail-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+
+.order-detail-total-row.grand-total {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold-dark);
+  font-family: var(--font-display);
+  margin-bottom: 0;
+}
+
+.order-detail-facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 12px;
+}
+
+.order-detail-facts dt {
+  color: var(--ink-faint);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.order-detail-facts dd {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.btn-cancel-order.full-width {
+  width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .order-detail-grid {
+    grid-template-columns: 1fr;
+  }
+  .order-progress {
+    overflow-x: auto;
+  }
+}
